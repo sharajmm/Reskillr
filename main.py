@@ -548,11 +548,11 @@ def query_openrouter_api(prompt):
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://reskillr.ai", # To identify your app
+            "HTTP-Referer": "https://reskillr.streamlit.app/", # To identify your app
         }
         
         data = {
-            "model": "mistralai/mistral-small-3.1-24b-instruct:free",
+            "model": "google/gemma-3-27b-it:free",
             "messages": [
                 {"role": "system", "content": "You are an experienced HR and resume reviewer. Respond only in plain text and well structured and well aligned. No markdown."},
                 {"role": "user", "content": prompt}
@@ -579,7 +579,7 @@ def query_openrouter_api(prompt):
 
 # Function to generate improved version of the resume
 def query_openrouter_improved_version(resume_text, job_role):
-    """Request an improved version of the resume from OpenRouter API."""
+    """Request an improved version of the resume from OpenRouter API(google/gemma-3-27b-it:free)."""
     try:
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -604,7 +604,7 @@ Use only ASCII characters to ensure compatibility.
 """
         
         data = {
-            "model": "mistralai/mistral-small-3.1-24b-instruct:free",
+            "model": "google/gemma-3-27b-it:free",
             "messages": [
                 {"role": "system", "content": "You are an experienced resume writer. Respond with the improved resume using markdown formatting with ASCII characters only."},
                 {"role": "user", "content": prompt}
