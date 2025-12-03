@@ -543,7 +543,7 @@ def extract_text(uploaded_file):
 
 # Function for OpenRouter API using the DeepSeek model
 def query_openrouter_api(prompt):
-    """Using OpenRouter API with DeepSeek-R1-0528-Qwen3-8B model."""
+    """Using OpenRouter API with mistralai/mistral-small-3.1-24b-instruct:free"""
     try:
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
