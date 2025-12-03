@@ -552,7 +552,7 @@ def query_openrouter_api(prompt):
         }
         
         data = {
-            "model": "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            "model": "mistralai/mistral-small-3.1-24b-instruct:free",
             "messages": [
                 {"role": "system", "content": "You are an experienced HR and resume reviewer. Respond only in plain text and well structured and well aligned. No markdown."},
                 {"role": "user", "content": prompt}
@@ -572,7 +572,7 @@ def query_openrouter_api(prompt):
             result = response.json()
             return result['choices'][0]['message']['content']
         else:
-            return f"Error: API returned status code {response.status_code}. {response.text}"
+            return f"Error: AI returned status code {response.status_code}. {response.text}"
     
     except Exception as e:
         return f"Sorry, I couldn't analyze your resume due to an error. Please try again later."
@@ -584,12 +584,12 @@ def query_openrouter_improved_version(resume_text, job_role):
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://reskillr.ai", # To identify your app
+            "HTTP-Referer": "https://reskillr.streamlit.app/", # To identify your app
         }
         
         prompt = f"""
 You are an experienced HR professional and resume writer. You need to create an improved version of the following resume
-for the role of {job_role}. Focus on enhancing the wording, structure, and impact without inventing new information.
+for the role of {job_role} and check if current version of resume is suitable for the job. Focus on enhancing the wording, structure, and impact without inventing new information.
 Make it more professional, impactful, and targeted for the specific role.
 
 Resume:
@@ -604,7 +604,7 @@ Use only ASCII characters to ensure compatibility.
 """
         
         data = {
-            "model": "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            "model": "mistralai/mistral-small-3.1-24b-instruct:free",
             "messages": [
                 {"role": "system", "content": "You are an experienced resume writer. Respond with the improved resume using markdown formatting with ASCII characters only."},
                 {"role": "user", "content": prompt}
@@ -624,7 +624,7 @@ Use only ASCII characters to ensure compatibility.
             result = response.json()
             return result['choices'][0]['message']['content']
         else:
-            return f"Error: API returned status code {response.status_code}. {response.text}"
+            return f"Error: AI returned status code {response.status_code}. {response.text}"
     
     except Exception as e:
         return f"Sorry, I couldn't generate an improved version of your resume due to an error. Please try again later."
@@ -726,7 +726,7 @@ Results-driven {job_role} with 5+ years of experience developing scalable applic
 # Main content flow - PURE STREAMLIT COMPONENTS
 if not uploaded_file or not job_role:
     # Welcome screen - using only pure Streamlit components
-    st.title("Resume Analyzer AI")
+    st.title("ReSkillr AI")
     st.write("Upload your resume for AI-powered feedback to enhance your job application success")
     
     # Getting Started section
@@ -907,4 +907,4 @@ Resume:
         st.error(f"Error processing your resume: {str(e)}")
 else:
     # Files are uploaded but button wasn't clicked yet
-    st.info("Click 'Analyze Resume' again to start the analysis.")
+    st.info("Please click 'Analyze Resume' again to start the analysis.")
