@@ -1,6 +1,6 @@
 # ReSkillr AI - Resume Analyzer
 
-## Live at - https://reskillreai.streamlit.app/
+## Live at - https://reskillr.streamlit.app/
 
 ![ReSkillr AI](https://img.shields.io/badge/ReSkillr-AI-blueviolet)
 
